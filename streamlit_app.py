@@ -17,7 +17,12 @@ st.write('The name of your Smoothie will be: ', name_on_order)
 cnx = st.connection("snowflake") 
 session = cnx.session() 
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'), col('SEARCH_ON'))
-st.dataframe(data=my_dataframe, use_container_width=True)
+#st.dataframe(data=my_dataframe, use_container_width=True)
+#st.stop()
+
+# Convert the snowpark dataframe to pandas dataframeso we can use the LOC function
+pd_df = my_dataframe.to_pandas()
+st.datagrame(pd_df)
 st.stop()
 
 # Create multiselect 
